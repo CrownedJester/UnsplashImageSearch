@@ -1,8 +1,9 @@
-package com.crownedjester.soft.unsplashimagesearch
+package com.crownedjester.soft.unsplashimagesearch.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
+import com.crownedjester.soft.unsplashimagesearch.R
 import com.crownedjester.soft.unsplashimagesearch.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

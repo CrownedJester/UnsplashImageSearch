@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.crownedjester.soft.unsplashimagesearch.DashboardFragment"
+        android:name="com.crownedjester.soft.unsplashimagesearch.presentation.dashboard.DashboardFragment"
         android:label="DashboardFragment" />
 </navigation>
