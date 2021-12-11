@@ -27,7 +27,9 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_retry"
         android:layout_centerInParent="true"
-        android:text="Result could not be loaded" />
+        android:text="Result could not be loaded"
+        android:visibility="invisible"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/button_retry"
@@ -35,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Retry"
+        android:textAllCaps="false"
         android:visibility="gone"
         tools:visibility="visible" />
 
