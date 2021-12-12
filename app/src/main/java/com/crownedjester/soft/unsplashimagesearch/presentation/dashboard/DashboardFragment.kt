@@ -1,9 +1,13 @@
 package com.crownedjester.soft.unsplashimagesearch.presentation.dashboard
 
+import android.Manifest
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -26,9 +30,26 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
     private val unsplashViewModel: UnsplashViewModel by viewModels()
     private val unsplashPhotoAdapter = UnsplashPhotoAdapter(this)
 
+    private var requestPermissionLauncher: ActivityResultLauncher<String>? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentDashboardBinding.bind(view)
+
+
+        requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+                if (isGranted) {
+                    Toast.makeText(requireContext(), "All Permissions Granted!", Toast.LENGTH_LONG)
+                        .show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Denied important permission",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
 
         binding.apply {
             recyclerView.apply {
@@ -73,6 +94,12 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard),
 
         val searchItem = menu.findItem(R.id.search_bar)
         val searchView = searchItem.actionView as SearchView
+        val permissionRequest = menu.findItem(R.id.permissions_request)
+
+        permissionRequest.setOnMenuItemClickListener { menuItem ->
+            requestPermissionLauncher?.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            true
+        }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
