@@ -22,6 +22,8 @@ data class PhotoDto(
 
     @Parcelize
     data class User(
-        val username: String
-    ) : Parcelable
+        val username: String,
+        val name: String
+    ) : Parcelable {
+    }
 }
