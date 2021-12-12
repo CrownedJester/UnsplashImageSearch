@@ -11,11 +11,23 @@ import com.crownedjester.soft.unsplashimagesearch.R
 import com.crownedjester.soft.unsplashimagesearch.data.remote.dto.PhotoDto
 import com.crownedjester.soft.unsplashimagesearch.databinding.ItemDashboardBinding
 
-class UnsplashPhotoAdapter :
+class UnsplashPhotoAdapter(private val listener: OnItemClickListener) :
     PagingDataAdapter<PhotoDto, UnsplashPhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
 
-    class PhotoViewHolder(private val binding: ItemDashboardBinding) :
+    inner class PhotoViewHolder(private val binding: ItemDashboardBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.root.setOnClickListener {
+                val position = bindingAdapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val item = getItem(position)
+                    if (item != null) {
+                        listener.onItemClick(item)
+                    }
+                }
+            }
+        }
 
         fun bind(photo: PhotoDto) {
             binding.apply {
@@ -44,6 +56,10 @@ class UnsplashPhotoAdapter :
             ItemDashboardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
         return PhotoViewHolder(binding)
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(photo: PhotoDto)
     }
 
     companion object {
