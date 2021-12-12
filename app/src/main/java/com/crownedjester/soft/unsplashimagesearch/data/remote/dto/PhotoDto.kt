@@ -8,7 +8,8 @@ data class PhotoDto(
     val id: String,
     val description: String?,
     val urls: PhotoUrls,
-    val user: User
+    val user: User,
+    val links: Links
 ) : Parcelable {
 
     @Parcelize
@@ -25,5 +26,11 @@ data class PhotoDto(
         val username: String,
         val name: String
     ) : Parcelable {
+        val attributionUrl get() = "https://unsplash.com/$username?utm_source=ImageSearchApp&utm_medium=referral"
     }
+
+    @Parcelize
+    data class Links(
+        val download: String
+    ) : Parcelable
 }
