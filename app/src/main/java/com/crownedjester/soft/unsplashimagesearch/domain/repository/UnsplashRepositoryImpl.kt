@@ -8,7 +8,6 @@ import com.crownedjester.soft.unsplashimagesearch.domain.UnsplashPagingSource
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class UnsplashRepositoryImpl @Inject constructor(
     private val unsplashApi: UnsplashApi
 ) : UnsplashRepository {
